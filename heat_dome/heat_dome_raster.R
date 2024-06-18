@@ -32,8 +32,6 @@ col_pal = colorRampPalette(colors = c(
 ))
 cur_pal = rev(col_pal(100))
 
-#bg_col = 'darkgrey'
-
 temp <- ggplot() +
   geom_tile(data = dat_df, aes(x = x, y = y, fill = elev)) +
   scale_fill_gradientn(colors=cur_pal)+
@@ -43,9 +41,11 @@ temp <- ggplot() +
         axis.text = element_blank(),
         axis.title = element_blank(),
         axis.ticks = element_blank(),
-        plot.background = element_rect(fill = 'grey90', color=NA),
-        panel.background = element_rect(fill = 'grey90', color=NA)) +
+        plot.background = element_rect(fill = 'grey10', color=NA),
+        panel.background = element_rect(fill = 'grey10', color=NA)) +
   coord_equal(ratio = 1.3)
+
+bg_col = 'grey10'
 
 plot_gg(temp,
         raytrace = T,
@@ -57,7 +57,8 @@ plot_gg(temp,
         solid =F
         )
 
-render_highquality('heat_dome_fog.png', 
+render_highquality('heat_dome_fog2.png', 
+                  ground_material = diffuse(color = 'grey10'),
                    samples = 500,
                    scene_elements = rayrender::add_object(sphere(x = 120, y = -5, z = 130, radius = 100,
                                                                  material = rayrender::diffuse(fog = T, fogdensity = .02)
